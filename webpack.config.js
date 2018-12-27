@@ -12,10 +12,6 @@ module.exports = {
       }
     ]
   },
-  node: {
-    fs: 'empty',
-    net: 'empty',
-  },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
@@ -23,4 +19,5 @@ module.exports = {
   resolve: {
     extensions: [ '.ts', '.js' ]
   },
+  target: 'node',
 };
