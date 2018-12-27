@@ -1,0 +1,10 @@
+{
+  "name": "babol",
+  "version": "1.0.0",
+  "description": "Share music links seamslessly across services",
+  "main": "index.js",
+  "repository": "https://github.com/MarcManiez/babol.git",
+  "author": "marcmaniez <marc.maniez@gmail.com>",
+  "license": "MIT",
+  "private": true
+}
