@@ -1,1 +1,5 @@
+# Bundler output
+dist
+
+# Third party modules
 node_modules
