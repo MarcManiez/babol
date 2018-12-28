@@ -1,15 +1,17 @@
+const glob = require("glob")
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 
 const nodeEnv = (process.env.NODE_ENV || 'development')
 const isProduction = (nodeEnv === 'production')
+const mode = isProduction ? 'production' : 'development'
 
 module.exports = [
   {
     devtool: 'inline-source-map',
     entry: './app/server.ts',
     externals: [nodeExternals()],
-    mode: isProduction ? 'production' : 'development',
+    mode,
     module: {
       rules: [
         {
@@ -29,12 +31,12 @@ module.exports = [
     target: 'node',
   },
   {
-    entry: './views/index.scss',
+    entry: glob.sync('./views/*.scss'),
     output: {
       filename: 'bundle.min.css',
       path: path.resolve(__dirname, 'dist')
     },
-    mode: isProduction ? 'production' : 'development',
+    mode,
     module: {
       rules: [
         {
