@@ -5,7 +5,7 @@ import routes from './routes'
 const app = express()
 const port = 3000
 
-app.set('views', './views')
+app.set('views', './app/views')
 app.set('view engine', 'pug')
 
 routes(app)

@@ -35,7 +35,7 @@ module.exports = [
   {
     devtool: 'inline-source-map',
     entry: {
-      client: './views/client-app.ts',
+      client: './app/views/client-app.ts',
     },
     mode,
     module: {
