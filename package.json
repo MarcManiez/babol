@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "bundle:server:development": "node_modules/.bin/webpack --config webpack.config.js --watch",
+    "build:app:development": "rm dist/* && node_modules/.bin/webpack --config webpack.config.js --watch",
     "run:server:development": "node_modules/nodemon/bin/nodemon.js ./dist/server-bundle.js"
   },
   "dependencies": {
