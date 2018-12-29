@@ -58,7 +58,6 @@ module.exports = [
               loader: 'sass-loader',
               options: {
                 sourceMap: true,
-                includePaths: ['./app/lib/styles'].map((d) => path.join(__dirname, d)),
               },
             },
           ]
@@ -67,9 +66,6 @@ module.exports = [
           test: /\.(gif|jpg|png|svg|eot|woff)$/,
           use: {
             loader: 'file-loader',
-            options: {
-              publicPath: (isProduction ? 'https://brandless-production-static.imgix.net/assets/' : '/assets/'),
-            },
           },
         },
       ]
