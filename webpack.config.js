@@ -17,7 +17,7 @@ module.exports = [
     module: {
       rules: [
         {
-          test: /\.tsx?$/,
+          test: /\.ts?$/,
           use: 'ts-loader',
           exclude: /node_modules/,
         },
@@ -33,14 +33,15 @@ module.exports = [
     target: 'node',
   },
   {
+    devtool: 'inline-source-map',
     entry: {
-      client: './views/client-app.js',
+      client: './views/client-app.ts',
     },
     mode,
     module: {
       rules: [
         {
-          test: /\.tsx?$/,
+          test: /\.ts?$/,
           use: 'ts-loader',
           exclude: /node_modules/,
         },
