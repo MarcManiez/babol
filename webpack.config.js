@@ -9,7 +9,9 @@ const mode = isProduction ? 'production' : 'development'
 module.exports = [
   {
     devtool: 'inline-source-map',
-    entry: './app/server.ts',
+    entry: {
+      server: './app/server.ts'
+    },
     externals: [nodeExternals()],
     mode,
     module: {
@@ -22,7 +24,7 @@ module.exports = [
       ]
     },
     output: {
-      filename: 'server-bundle.js',
+      filename: '[name]-bundle.js',
       path: path.resolve(__dirname, 'dist')
     },
     resolve: {
