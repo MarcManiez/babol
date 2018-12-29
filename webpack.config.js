@@ -1,4 +1,4 @@
-const glob = require("glob")
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 
@@ -31,17 +31,37 @@ module.exports = [
     target: 'node',
   },
   {
-    entry: glob.sync('./views/*.scss'),
-    output: {
-      filename: 'bundle.min.css',
-      path: path.resolve(__dirname, 'dist')
-    },
     mode,
+    entry: {
+      client: './views/client-app.js',
+    },
+
+    output: {
+      filename: '[name]-bundle.js',
+      path: path.resolve('dist'),
+    },
+
+    resolve: {
+      extensions: ['.js', '.scss', '.ts' ],
+    },
+
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: '[name]-bundle.css',
+      }),
+    ],
+
     module: {
       rules: [
         {
+          test: /\.tsx?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/
+        },
+        {
           test: /\.(css|scss)$/,
           use: [
+            MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
               options: {
@@ -52,12 +72,22 @@ module.exports = [
               loader: 'sass-loader',
               options: {
                 sourceMap: true,
+                includePaths: ['./app/lib/styles'].map((d) => path.join(__dirname, d)),
               },
             },
           ]
         },
-      ],
+        {
+          test: /\.(gif|jpg|png|svg|eot|woff)$/,
+          use: {
+            loader: 'file-loader',
+            options: {
+              publicPath: (isProduction ? 'https://brandless-production-static.imgix.net/assets/' : '/assets/'),
+            },
+          },
+        },
+      ]
     },
-  },
+  }
 ]
 
