@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    "outDir": "./dist/",
-    "sourceMap": true,
+    "allowJs": true,
+    "module": "es6",
     "noImplicitAny": true,
     "noUnusedLocals": true,
-    "module": "es6",
-    "target": "es5",
-    "jsx": "react",
-    "allowJs": true
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "target": "es5"
   }
 }
