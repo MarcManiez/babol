@@ -2,15 +2,15 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 
-const nodeEnv = (process.env.NODE_ENV || 'development')
-const isProduction = (nodeEnv === 'production')
+const nodeEnv = process.env.NODE_ENV || 'development'
+const isProduction = nodeEnv === 'production'
 const mode = isProduction ? 'production' : 'development'
 
 module.exports = [
   {
     devtool: 'inline-source-map',
     entry: {
-      server: './app/server.ts'
+      server: './app/server.ts',
     },
     externals: [nodeExternals()],
     mode,
@@ -19,16 +19,16 @@ module.exports = [
         {
           test: /\.tsx?$/,
           use: 'ts-loader',
-          exclude: /node_modules/
-        }
-      ]
+          exclude: /node_modules/,
+        },
+      ],
     },
     output: {
       filename: '[name]-bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
     resolve: {
-      extensions: [ '.ts', '.js' ]
+      extensions: ['.ts', '.js'],
     },
     target: 'node',
   },
@@ -42,7 +42,7 @@ module.exports = [
         {
           test: /\.tsx?$/,
           use: 'ts-loader',
-          exclude: /node_modules/
+          exclude: /node_modules/,
         },
         {
           test: /\.(css|scss)$/,
@@ -60,7 +60,7 @@ module.exports = [
                 sourceMap: true,
               },
             },
-          ]
+          ],
         },
         {
           test: /\.(gif|jpg|png|svg|eot|woff)$/,
@@ -68,7 +68,7 @@ module.exports = [
             loader: 'file-loader',
           },
         },
-      ]
+      ],
     },
     output: {
       filename: '[name]-bundle.js',
@@ -80,8 +80,7 @@ module.exports = [
       }),
     ],
     resolve: {
-      extensions: ['.js', '.scss', '.ts' ],
+      extensions: ['.js', '.scss', '.ts'],
     },
-  }
+  },
 ]
-
