@@ -3,3 +3,6 @@ dist
 
 # Third party modules
 node_modules
+
+# VS Code configuration
+.vscode
