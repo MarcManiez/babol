@@ -33,26 +33,10 @@ module.exports = [
     target: 'node',
   },
   {
-    mode,
     entry: {
       client: './views/client-app.js',
     },
-
-    output: {
-      filename: '[name]-bundle.js',
-      path: path.resolve('dist'),
-    },
-
-    resolve: {
-      extensions: ['.js', '.scss', '.ts' ],
-    },
-
-    plugins: [
-      new MiniCssExtractPlugin({
-        filename: '[name]-bundle.css',
-      }),
-    ],
-
+    mode,
     module: {
       rules: [
         {
@@ -89,6 +73,18 @@ module.exports = [
           },
         },
       ]
+    },
+    output: {
+      filename: '[name]-bundle.js',
+      path: path.resolve('dist'),
+    },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: '[name]-bundle.css',
+      }),
+    ],
+    resolve: {
+      extensions: ['.js', '.scss', '.ts' ],
     },
   }
 ]
