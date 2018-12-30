@@ -17,6 +17,7 @@ const {
 const commonProductionOptions = merge(
   {
     mode: 'production',
+    devtool: 'source-map',
   },
   commonOptions,
 )
