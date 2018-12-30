@@ -1,3 +1,4 @@
+require('dotenv').config()
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
