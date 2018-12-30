@@ -4,13 +4,19 @@ const path = require('path')
 const merge = require('webpack-merge')
 const nodeExternals = require('webpack-node-externals')
 
-const nodeEnv = process.env.NODE_ENV || 'development'
-const isProduction = nodeEnv === 'production'
-const mode = isProduction ? 'production' : 'development'
+/**
+ * Babol creates two bundles: one for typescript code run in node, and one for
+ * templates containing typescript code, CSS, and other assets destined for the
+ * browser.
+ *
+ * Babol also has two webpack configuration files: one run in development, and
+ * another in production.
+ *
+ * This configuration file contains the options common to *ALL* bundles:
+ * server, templates, whether in production or development.
+ */
 
-const serverAndTemplatesOptions = {
-  devtool: 'inline-source-map',
-  mode: 'development',
+const commonOptions = {
   module: {
     rules: [
       {
@@ -29,17 +35,17 @@ const serverAndTemplatesOptions = {
   },
 }
 
-const serverConfiguration = merge(serverAndTemplatesOptions, {
+const commonServerOptions = {
   entry: {
     server: './app/server.ts',
   },
   externals: [nodeExternals()],
   target: 'node',
-})
+}
 
-const templatesConfiguration = merge(serverAndTemplatesOptions, {
+const commonTemplatesOptions = {
   entry: {
-    client: './app/views/client-app.ts',
+    templates: './app/views/client-app.ts',
   },
   module: {
     rules: [
@@ -77,6 +83,10 @@ const templatesConfiguration = merge(serverAndTemplatesOptions, {
   resolve: {
     extensions: ['.scss'],
   },
-})
+}
 
-module.exports = [serverConfiguration, templatesConfiguration]
+module.exports = {
+  commonOptions,
+  commonServerOptions,
+  commonTemplatesOptions,
+}

@@ -8,8 +8,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build:app:development": "rm dist/* && node_modules/.bin/webpack --config webpack.config.js --watch",
-    "run:server:development": "node_modules/nodemon/bin/nodemon.js ./dist/server-bundle.js"
+    "build:app:development": "rm dist/* && node_modules/.bin/webpack --config webpack.dev.js --watch",
+    "build:app:production": "node_modules/.bin/webpack --config webpack.prod.js",
+    "run:server:development": "node_modules/nodemon/bin/nodemon.js ./dist/server-bundle.js",
+    "run:server:production": "node ./dist/server-bundle.js"
   },
   "dependencies": {
     "@types/dotenv": "^6.1.0",
