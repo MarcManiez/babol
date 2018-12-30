@@ -3,12 +3,11 @@ import SpotifyLinkCollection from '../models/SpotifyLinkCollection'
 
 export default createConnection({
   type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'marcmaniez',
-  password: '',
-  database: 'babol',
+  url: process.env.DB_URL,
   entities: [SpotifyLinkCollection],
-  synchronize: true,
-  logging: false,
+  synchronize: process.env.NODE_ENV === 'development',
+  logging:
+    process.env.NODE_ENV === 'development'
+      ? ['query', 'warn', 'log', 'info']
+      : 'all',
 })
