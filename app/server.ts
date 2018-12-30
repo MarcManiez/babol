@@ -1,6 +1,9 @@
+import { config } from 'dotenv'
 import * as express from 'express'
 
 import routes from './routes'
+
+config()
 
 const app = express()
 const port = 3000
