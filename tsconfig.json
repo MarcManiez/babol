@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
     "allowJs": true,
+    "lib": [
+      "dom",
+      "es2015",
+      "es2016"
+    ],
     "module": "commonjs",
     "noImplicitAny": true,
     "noUnusedLocals": true,
