@@ -14,9 +14,12 @@ const {
  * another for the templates.
  */
 
-const commonProductionOptions = merge({
-  mode: 'production',
-}, commonOptions)
+const commonProductionOptions = merge(
+  {
+    mode: 'production',
+  },
+  commonOptions,
+)
 
 const productionServerConfiguration = commonServerOptions
 const productionTemplatesConfiguration = commonTemplatesOptions

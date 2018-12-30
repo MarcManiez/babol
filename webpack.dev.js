@@ -14,10 +14,13 @@ const {
  * another for the templates.
  */
 
-const commonDevelopmentOptions = merge({
-  devtool: 'inline-source-map',
-  mode: 'development',
-}, commonOptions)
+const commonDevelopmentOptions = merge(
+  {
+    devtool: 'inline-source-map',
+    mode: 'development',
+  },
+  commonOptions,
+)
 
 const developmentServerConfiguration = commonServerOptions
 const developmentTemplatesConfiguration = commonTemplatesOptions
