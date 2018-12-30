@@ -1,3 +1,5 @@
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const merge = require('webpack-merge')
 
 const {
@@ -16,14 +18,27 @@ const {
 
 const commonProductionOptions = merge(
   {
-    mode: 'production',
     devtool: 'source-map',
+    mode: 'production',
+    optimization: {
+      minimizer: [
+        new UglifyJsPlugin({
+          cache: true,
+          parallel: true,
+          sourceMap: true,
+        }),
+      ],
+    },
   },
   commonOptions,
 )
 
 const productionServerConfiguration = commonServerOptions
-const productionTemplatesConfiguration = commonTemplatesOptions
+const productionTemplatesConfiguration = merge(commonTemplatesOptions, {
+  optimization: {
+    minimizer: [new OptimizeCSSAssetsPlugin({})],
+  },
+})
 
 module.exports = [
   merge(commonProductionOptions, productionServerConfiguration),
