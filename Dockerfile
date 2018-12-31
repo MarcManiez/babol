@@ -6,7 +6,7 @@ COPY . /application
 
 RUN yarn install
 
-EXPOSE 3000
+EXPOSE 80
 
 RUN ["yarn", "build:app:production"]
 CMD ["yarn", "run:server:production"]
