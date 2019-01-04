@@ -3,7 +3,7 @@ import * as express from 'express'
 import routes from './routes'
 
 const app = express()
-const port = 80
+const port = 3000
 
 app.set('views', './app/views')
 app.set('view engine', 'pug')
