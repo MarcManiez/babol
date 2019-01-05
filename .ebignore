@@ -1,0 +1,3 @@
+*
+!.ebignore
+!Dockerrun.aws.json
