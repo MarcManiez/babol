@@ -18,17 +18,7 @@ const {
 
 const commonProductionOptions = merge(
   {
-    devtool: 'source-map',
     mode: 'production',
-    optimization: {
-      minimizer: [
-        new UglifyJsPlugin({
-          cache: true,
-          parallel: true,
-          sourceMap: true,
-        }),
-      ],
-    },
   },
   commonOptions,
 )
