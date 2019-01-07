@@ -1,0 +1,6 @@
+{
+  "migrations": ["app/db/migrations/*.js"],
+  "cli": {
+    "migrationsDir": "app/db/migrations"
+  }
+}
