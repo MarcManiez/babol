@@ -23,7 +23,7 @@ export default createConnection({
   type: 'postgres',
   url: url(),
   entities: [SpotifyLinkCollection, TestModel],
-  synchronize: process.env.NODE_ENV === 'development',
+    synchronize: false,
   logging:
     process.env.NODE_ENV === 'development'
       ? ['query', 'warn', 'log', 'info']

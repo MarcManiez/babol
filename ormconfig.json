@@ -1,5 +1,6 @@
 {
-  "migrations": ["app/db/migrations/*.js"],
+  "type": "postgres",
+  "migrations": ["app/db/compiled_migrations/*.js"],
   "cli": {
     "migrationsDir": "app/db/migrations"
   }
