@@ -1,31 +1,25 @@
-import { createConnection } from 'typeorm'
+import { createConnection as typeormCreateConnection } from 'typeorm'
 
 import SpotifyLinkCollection from '../models/SpotifyLinkCollection'
 import TestModel from '../models/TestModel'
+/* tslint:disable:no-var-requires */
+const credentials = require('./credentials')
+/* tslint:enable:no-var-requires */
 
-function url() {
-  // TODO: Potentially handle test environment separately
-  if (process.env.NODE_ENV !== 'production') {
-    return process.env.DB_URL
-  } else {
-    const {
-      RDS_USERNAME,
-      RDS_PASSWORD,
-      RDS_HOSTNAME,
-      RDS_PORT,
-      RDS_DB_NAME,
-    } = process.env
-    return `postgresql://${RDS_USERNAME}:${RDS_PASSWORD}@${RDS_HOSTNAME}:${RDS_PORT}/${RDS_DB_NAME}`
-  }
-}
-
-export default createConnection({
-  type: 'postgres',
-  url: url(),
-  entities: [SpotifyLinkCollection, TestModel],
+export default function createConnection() {
+  const { host, port, username, password, database } = credentials()
+  return typeormCreateConnection({
+    type: 'postgres',
+    host,
+    port,
+    username,
+    password,
+    database,
+    entities: [SpotifyLinkCollection, TestModel],
     synchronize: false,
-  logging:
-    process.env.NODE_ENV === 'development'
-      ? ['query', 'warn', 'log', 'info']
-      : 'all',
-})
+    logging:
+      process.env.NODE_ENV === 'development'
+        ? ['query', 'warn', 'log', 'info']
+        : 'all',
+  })
+}
