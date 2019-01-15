@@ -1,5 +1,4 @@
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const merge = require('webpack-merge')
 
 const {
@@ -23,7 +22,11 @@ const commonProductionOptions = merge(
   commonOptions,
 )
 
-const productionServerConfiguration = commonServerOptions
+const productionServerConfiguration = merge(commonServerOptions, {
+  optimization: {
+    minimize: false,
+  },
+})
 const productionTemplatesConfiguration = merge(commonTemplatesOptions, {
   optimization: {
     minimizer: [new OptimizeCSSAssetsPlugin({})],
