@@ -12,9 +12,9 @@
     "build:app:production": "node_modules/.bin/webpack --config webpack.prod.js",
     "run:server:development": "node_modules/nodemon/bin/nodemon.js ./dist/server-bundle.js",
     "run:server:production": "node ./dist/server-bundle.js",
-    "migrations:compile": "ls -d -1 app/db/migrations/** | xargs -J '{}' tsc --outDir app/db/compiled_migrations '{}' --lib 'ES2015'",
-    "migrations:run": "yarn migrations:compile && typeorm migration:run",
-    "migrations:revert": "yarn migrations:compile && typeorm migration:revert"
+    "migrations:compile": "ls -d -1 app/db/migrations/** | xargs -I '{}' ./node_modules/typescript/bin/tsc --outDir app/db/compiled_migrations '{}' --lib 'ES2015'",
+    "migrations:run": "yarn migrations:compile && ./node_modules/typeorm/cli.js migration:run",
+    "migrations:revert": "yarn migrations:compile && ./node_modules/typeorm/cli.js migration:revert"
   },
   "dependencies": {
     "@types/dotenv": "^6.1.0",
