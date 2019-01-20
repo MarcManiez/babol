@@ -1,5 +1,6 @@
 import { createConnection as typeormCreateConnection } from 'typeorm'
 
+import AppleLinkCollection from '../models/AppleLinkCollection'
 import SpotifyLinkCollection from '../models/SpotifyLinkCollection'
 import TestModel from '../models/TestModel'
 /* tslint:disable:no-var-requires */
@@ -15,7 +16,7 @@ export default function createConnection() {
     username,
     password,
     database,
-    entities: [SpotifyLinkCollection, TestModel],
+    entities: [SpotifyLinkCollection, TestModel, AppleLinkCollection],
     synchronize: false,
     logging:
       process.env.NODE_ENV === 'development'
