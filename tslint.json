@@ -51,6 +51,7 @@
     "space-within-parens": [true, 0],
     "trailing-comma": false,
     "triple-equals": true,
+    "variable-name": [true, "check-format", "allow-leading-underscore"],
     "whitespace": [true,
       "check-branch",
       "check-decl",
