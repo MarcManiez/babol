@@ -1,0 +1,51 @@
+options:
+  formatter: stylish
+  merge-default-rules: false
+rules:
+  brace-style:
+    - 2
+    - style: 1tbs
+      allow-single-line: true
+  declarations-before-nesting:
+    - 2
+  empty-line-between-blocks:
+    - 2
+    - allow-single-line-rulesets: true
+  final-newline:
+    - 2
+  indentation:
+    - 2
+    - size: 2
+  no-disallowed-properties:
+    - 2
+    - properties:
+        - animation # Use individual `animation-xyz` properties.
+        - flex # Use individual `flex-xyz` properties.
+        - flex-basis # Use `width` instead.
+  no-misspelled-properties:
+    - 2
+  no-trailing-whitespace:
+    - 2
+  no-transition-all:
+    - 2
+  property-sort-order:
+    - 2
+    - order: smacss
+      ignore-custom-properties: true
+  space-after-bang:
+    - 2
+  space-after-colon:
+    - 2
+  space-after-comma:
+    - 2
+  # Scss can be finicky about operators so we're skipping this for now:
+  #   space-around-operator:
+  #     - 2
+  space-before-brace:
+    - 2
+  space-before-colon:
+    - 2
+  space-between-parens:
+    - 2
+  trailing-semicolon:
+    - 2
