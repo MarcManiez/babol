@@ -17,3 +17,6 @@ node_modules
 
 # Compiled typeorm migrations
 app/db/compiled_migrations
+
+# yarn error logs
+yarn-error.log
