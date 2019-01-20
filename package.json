@@ -15,7 +15,7 @@
     "migrations:compile": "ls -d -1 app/db/migrations/** | xargs -I '{}' ./node_modules/typescript/bin/tsc --outDir app/db/compiled_migrations '{}' --lib 'ES2015'",
     "migrations:run": "yarn migrations:compile && ./node_modules/typeorm/cli.js migration:run",
     "migrations:revert": "yarn migrations:compile && ./node_modules/typeorm/cli.js migration:revert",
-    "test": "node_modules/.bin/jest"
+    "test": "NODE_ENV=test node_modules/.bin/jest"
   },
   "jest": {
     "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
@@ -26,6 +26,11 @@
       "ts",
       "tsx",
       "js"
+    ],
+    "testEnvironment": "node",
+    "setupTestFrameworkScriptFile": "./__tests__/setup/databaseSetupAndTearDown.ts",
+    "testPathIgnorePatterns": [
+      "./__tests__/setup"
     ]
   },
   "dependencies": {
