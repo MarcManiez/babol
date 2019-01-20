@@ -6,7 +6,7 @@ services:
 install:
   - yarn install
 before_script:
-  - psql -c 'create database babol;' -U postgres
+  - psql -c 'create database babol_test;' -U postgres
   - 'yarn migrations:run'
 script:
   - yarn test
