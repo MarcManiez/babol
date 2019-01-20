@@ -20,3 +20,6 @@ app/db/compiled_migrations
 
 # yarn error logs
 yarn-error.log
+
+# Compiled file created while running migrations
+credentials.js
