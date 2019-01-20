@@ -14,16 +14,30 @@
     "run:server:production": "node ./dist/server-bundle.js",
     "migrations:compile": "ls -d -1 app/db/migrations/** | xargs -I '{}' ./node_modules/typescript/bin/tsc --outDir app/db/compiled_migrations '{}' --lib 'ES2015'",
     "migrations:run": "yarn migrations:compile && ./node_modules/typeorm/cli.js migration:run",
-    "migrations:revert": "yarn migrations:compile && ./node_modules/typeorm/cli.js migration:revert"
+    "migrations:revert": "yarn migrations:compile && ./node_modules/typeorm/cli.js migration:revert",
+    "test": "node_modules/.bin/jest"
+  },
+  "jest": {
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
   },
   "dependencies": {
     "@types/dotenv": "^6.1.0",
     "@types/express": "^4.16.0",
+    "@types/jest": "^23.3.13",
     "@types/pug": "^2.0.4",
     "css-loader": "^2.1.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "file-loader": "^3.0.1",
+    "jest": "^23.6.0",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
@@ -32,6 +46,7 @@
     "pug": "^2.0.3",
     "reflect-metadata": "^0.1.12",
     "sass-loader": "^7.1.0",
+    "ts-jest": "^23.10.5",
     "ts-loader": "^5.3.2",
     "tslint": "^5.12.0",
     "typeorm": "^0.2.9",
