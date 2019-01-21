@@ -2,6 +2,7 @@ import { config } from 'dotenv'
 import * as express from 'express'
 
 import createConnection from './db/connection'
+import middleware from './middleware'
 import routes from './routes'
 
 config()
@@ -12,9 +13,11 @@ app.set('views', './app/views')
 app.set('view engine', 'pug')
 app.use(express.static('public'))
 
-routes(app)
-
-createConnection().then(_connectionPool => {
+createConnection().then(connectionPool => {
   console.log('Connection pool instantiated')
 })
+
+middleware(app)
+routes(app)
+
 app.listen(port, () => console.log(`Listening on port ${port}!`))
