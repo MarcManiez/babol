@@ -46,7 +46,7 @@ const commonServerOptions = {
 
 const commonTemplatesOptions = {
   entry: {
-    templates: './app/views/client-app.ts',
+    templates: './app/views/client/index.ts',
   },
   output: {
     path: path.resolve(__dirname, 'public'),
