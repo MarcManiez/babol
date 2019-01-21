@@ -1,6 +1,8 @@
 import '../styles/index.scss'
 import '../styles/layout.scss'
 
+import attachEventListeners from './eventListeners'
+
 document.addEventListener('DOMContentLoaded', () => {
-  console.log(document.querySelector('.HomePage form'))
+  attachEventListeners()
 })
