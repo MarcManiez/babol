@@ -9,4 +9,7 @@ before_script:
   - psql -c 'create database babol_test;' -U postgres
   - 'yarn migrations:run'
 script:
+  - yarn lint:sass
+  - yarn lint:prettier
+  - yarn lint:tslint
   - yarn test

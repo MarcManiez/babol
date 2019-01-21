@@ -15,6 +15,9 @@
     "migrations:compile": "ls -d -1 app/db/migrations/** | xargs -I '{}' ./node_modules/typescript/bin/tsc --outDir app/db/compiled_migrations '{}' --lib 'ES2015'",
     "migrations:run": "yarn migrations:compile && ./node_modules/typeorm/cli.js migration:run",
     "migrations:revert": "yarn migrations:compile && ./node_modules/typeorm/cli.js migration:revert",
+    "lint:tslint": "./node_modules/.bin/sass-lint --no-exit --verbose 'app/**/*.scss'",
+    "lint:sass": "./node_modules/tslint/bin/tslint 'app/**/*.ts?(x)' --format stylish --project ./tsconfig.json",
+    "lint:prettier": "./node_modules/.bin/prettier --list-different app/**/*.ts app/**/*.tsx",
     "test": "NODE_ENV=test node_modules/.bin/jest"
   },
   "jest": {
