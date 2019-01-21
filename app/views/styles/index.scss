@@ -1,0 +1,16 @@
+
+.HomePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100vh;
+  background-image: url('../assets/babol-home.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  p {
+    color: white;
+    text-align: center;
+  }
+}
