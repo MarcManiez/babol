@@ -1,4 +1,5 @@
 import { createConnection as typeormCreateConnection } from 'typeorm'
+import { LoggerOptions } from 'typeorm/logger/LoggerOptions'
 
 import AppleLinkCollection from '../models/AppleLinkCollection'
 import SpotifyLinkCollection from '../models/SpotifyLinkCollection'
@@ -9,6 +10,14 @@ const credentials = require('./credentials')
 
 export default function createConnection() {
   const { host, port, username, password, database } = credentials()
+  let logging: LoggerOptions
+  if (process.env.NODE_ENV === 'production') {
+    logging = 'all'
+  } else if (process.env.NODE_ENV === 'test') {
+    logging = ['error']
+  } else {
+    logging = ['query', 'warn', 'log', 'info']
+  }
   return typeormCreateConnection({
     type: 'postgres',
     host,
@@ -18,9 +27,6 @@ export default function createConnection() {
     database,
     entities: [SpotifyLinkCollection, TestModel, AppleLinkCollection],
     synchronize: false,
-    logging:
-      process.env.NODE_ENV === 'development'
-        ? ['query', 'warn', 'log', 'info']
-        : 'all',
+    logging,
   })
 }
