@@ -10,6 +10,7 @@ const port = 3000
 
 app.set('views', './app/views')
 app.set('view engine', 'pug')
+app.use(express.static('public'))
 
 routes(app)
 

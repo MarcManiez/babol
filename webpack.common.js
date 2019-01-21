@@ -26,8 +26,7 @@ const commonOptions = {
     ],
   },
   output: {
-    filename: '[name]-bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: '[name]-bundle.js'
   },
   resolve: {
     extensions: ['.js', '.ts'],
@@ -38,6 +37,9 @@ const commonServerOptions = {
   entry: {
     server: './app/server.ts',
   },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+  },
   externals: [nodeExternals()],
   target: 'node',
 }
@@ -45,6 +47,9 @@ const commonServerOptions = {
 const commonTemplatesOptions = {
   entry: {
     templates: './app/views/client-app.ts',
+  },
+  output: {
+    path: path.resolve(__dirname, 'public'),
   },
   module: {
     rules: [

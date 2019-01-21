@@ -1,5 +1,6 @@
 # Bundler output
 dist
+public
 
 # Third party modules
 node_modules
