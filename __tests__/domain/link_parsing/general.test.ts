@@ -1,7 +1,7 @@
 import {
   detectStreamingService,
   StreamingServices,
-} from '../../app/domain/linkParsing'
+} from '../../../app/domain/link_parsing/general'
 
 describe('detectStreamingService', () => {
   it('should correctly detect valid apple links', () => {
