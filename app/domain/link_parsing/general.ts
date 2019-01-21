@@ -1,9 +1,9 @@
-export enum StreamingServices {
+export enum StreamingService {
   Spotify = 'spotify',
   Apple = 'apple',
 }
 
-export function detectStreamingService(link: string): StreamingServices | null {
+export function detectStreamingService(link: string): StreamingService | null {
   const serviceRegexLists: { [service: string]: RegExp[] } = {
     apple: [/^https?:\/\/itun\.es\/\S+/g],
     spotify: [
@@ -14,12 +14,12 @@ export function detectStreamingService(link: string): StreamingServices | null {
   for (const service in serviceRegexLists) {
     if (
       !serviceRegexLists[service] ||
-      !Object.values(StreamingServices).includes(service)
+      !Object.values(StreamingService).includes(service)
     ) {
       continue
     }
     if (serviceRegexLists[service].some(regex => !!link.match(regex))) {
-      return service as StreamingServices
+      return service as StreamingService
     }
   }
   return null
