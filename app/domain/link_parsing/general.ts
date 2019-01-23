@@ -2,7 +2,7 @@ import { StreamingService } from '../../types'
 
 export function detectStreamingService(link: string): StreamingService | null {
   const serviceRegexLists: { [service: string]: RegExp[] } = {
-    apple: [/^https?:\/\/itun\.es\/\S+/g],
+    apple: [/^https?:\/\/itun\.es\/\S+/g, /^https?:\/\/itunes.apple.com\/\S+/g],
     spotify: [
       /^https?:\/\/(play|open)\.spotify\.com\/\S+/g,
       /^spotify:(track|album|artist):.*/g,
