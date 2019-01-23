@@ -1,7 +1,4 @@
-export enum StreamingService {
-  Spotify = 'spotify',
-  Apple = 'apple',
-}
+import { StreamingService } from '../../types'
 
 export function detectStreamingService(link: string): StreamingService | null {
   const serviceRegexLists: { [service: string]: RegExp[] } = {
