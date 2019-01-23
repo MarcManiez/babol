@@ -1,6 +1,6 @@
 import { Headers } from 'node-fetch'
 
-import { StandardError } from '../../types'
+import { StandardError } from '../../errors'
 import { get, post } from '../requests'
 
 export default class SpotifyClient {
