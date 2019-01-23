@@ -1,42 +1,41 @@
 import * as spotify from '../../../app/domain/link_parsing/spotify'
+import * as links from '../../factories/links'
 
 describe('getId', () => {
   it('should retrieve a song id given a valid form url', () => {
-    const id = spotify.getId('https://open.spotify.com/track/45yEy5WJywhJ3sDI2')
-    expect(id).toBe('45yEy5WJywhJ3sDI2')
+    const id = spotify.getId(links.spotifyTrackUrl)
+    expect(id).toBe('4JehYebiI9JE8sR8MisGVb')
   })
 
   it('should retrieve a album id given a valid form url', () => {
-    const id = spotify.getId('https://open.spotify.com/album/5XfJmldgWzrc1AIdb')
-    expect(id).toBe('5XfJmldgWzrc1AIdb')
+    const id = spotify.getId(links.spotifyAlbumUrl)
+    expect(id).toBe('6M0IAJHwQ6dFNtTkFsXCJc')
   })
 
   it('should retrieve an artist id given a valid form url', () => {
-    const id = spotify.getId('https://open.spotify.com/artist/3WrFJ7ztbogyGnTH')
-    expect(id).toBe('3WrFJ7ztbogyGnTH')
+    const id = spotify.getId(links.spotifyArtistUrl)
+    expect(id).toBe('0BTfBwYC5Mw5ezDg91JBma')
   })
 
   it('should return null if the id could not be extracted', () => {
-    const id = spotify.getId(
-      'https://itunes.apple.com/us/artist/aaron-goldberg/id5421052/',
-    )
+    const id = spotify.getId('')
     expect(id).toBe(null)
   })
 })
 
 describe('getType', () => {
   it('should retrieve the track type given a track link', () => {
-    const id = spotify.getType('https://open.spotify.com/track/45yEy5WJywhJ3sD')
+    const id = spotify.getType(links.spotifyTrackUrl)
     expect(id).toBe(spotify.LinkType.Track)
   })
 
-  it('should retrieve the track type given a track link', () => {
-    const id = spotify.getType('https://open.spotify.com/album/45yEy5WJywhJ3sD')
+  it('should retrieve the track type given an album link', () => {
+    const id = spotify.getType(links.spotifyAlbumUrl)
     expect(id).toBe(spotify.LinkType.Album)
   })
 
-  it('should retrieve the track type given a track link', () => {
-    const id = spotify.getType('https://open.spotify.com/artist/45yEy5WJywhJ3s')
+  it('should retrieve the track type given an artist link', () => {
+    const id = spotify.getType(links.spotifyArtistUrl)
     expect(id).toBe(spotify.LinkType.Artist)
   })
 })

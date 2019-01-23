@@ -1,30 +1,30 @@
 import { detectStreamingService } from '../../../app/domain/link_parsing/general'
 import { StreamingService } from '../../../app/types'
+import * as links from '../../factories/links'
 
 describe('detectStreamingService', () => {
-  it('should correctly detect valid apple links', () => {
-    const service = detectStreamingService('https://itun.es/us/8FRu')
+  it('should correctly detect valid apple short links', () => {
+    const service = detectStreamingService(links.appleShortUrl)
+    expect(service).toBe(StreamingService.Apple)
+  })
+
+  it('should correctly detect valid apple long links', () => {
+    const service = detectStreamingService(links.appleAlbumUrl)
     expect(service).toBe(StreamingService.Apple)
   })
 
   it('should correctly detect valid play.spotify links', () => {
-    const service = detectStreamingService(
-      'https://play.spotify.com/artist/0BTfBwYC5Mw5ezDg91JBma',
-    )
+    const service = detectStreamingService(links.spotifyPlayUrl)
     expect(service).toBe(StreamingService.Spotify)
   })
 
   it('should correctly detect valid open.spotify links', () => {
-    const service = detectStreamingService(
-      'https://open.spotify.com/track/4JehYebiI9JE8sR8MisGVb',
-    )
+    const service = detectStreamingService(links.spotifyAlbumUrl)
     expect(service).toBe(StreamingService.Spotify)
   })
 
   it('should correctly detect valid spotify URIs', () => {
-    const service = detectStreamingService(
-      'spotify:artist:5olDKSsFhhmwh8UCWwKtpq',
-    )
+    const service = detectStreamingService(links.spotifyArtistUri)
     expect(service).toBe(StreamingService.Spotify)
   })
 
