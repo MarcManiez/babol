@@ -1,8 +1,4 @@
-export enum LinkType {
-  Track = 'track',
-  Album = 'album',
-  Artist = 'artist',
-}
+import { LinkType } from '../../types'
 
 export function getId(url: string): string | null {
   const ids = url.match(/\w+$/g)

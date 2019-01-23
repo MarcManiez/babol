@@ -1,4 +1,5 @@
 import * as spotify from '../../../app/domain/link_parsing/spotify'
+import { LinkType } from '../../../app/types'
 import * as links from '../../factories/links'
 
 describe('getId', () => {
@@ -26,16 +27,16 @@ describe('getId', () => {
 describe('getType', () => {
   it('should retrieve the track type given a track link', () => {
     const id = spotify.getType(links.spotifyTrackUrl)
-    expect(id).toBe(spotify.LinkType.Track)
+    expect(id).toBe(LinkType.Track)
   })
 
   it('should retrieve the track type given an album link', () => {
     const id = spotify.getType(links.spotifyAlbumUrl)
-    expect(id).toBe(spotify.LinkType.Album)
+    expect(id).toBe(LinkType.Album)
   })
 
   it('should retrieve the track type given an artist link', () => {
     const id = spotify.getType(links.spotifyArtistUrl)
-    expect(id).toBe(spotify.LinkType.Artist)
+    expect(id).toBe(LinkType.Artist)
   })
 })
