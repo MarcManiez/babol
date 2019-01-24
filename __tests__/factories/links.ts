@@ -4,7 +4,7 @@ export const appleAlbumUrl =
   'https://itunes.apple.com/us/album/walk-of-fire/1254730401'
 
 export const appleArtistUrl =
-  'https://itunes.apple.com/us/artist/aaron-goldberg/id5421052'
+  'https://itunes.apple.com/us/artist/aaron-goldberg/5421052'
 
 export const appleTrackUrl =
   'https://itunes.apple.com/us/album/walk-of-fire/1254730401?i=1254730420'
