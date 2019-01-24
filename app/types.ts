@@ -3,7 +3,7 @@ export enum StreamingService {
   Apple = 'apple',
 }
 
-export enum StreamServiceSlugPrefix {
+export enum StreamingServiceSlugPrefix {
   Spotify = 'SPT',
   Apple = 'APL',
 }
