@@ -2,7 +2,15 @@ import { getConnection } from 'typeorm'
 
 import createConnection from '../../app/db/connection'
 
-export async function createConnectionAndNukeDatabase() {
+/**
+ * Transaction use with typeorm comes with a healthy dose of caveats:
+ * http://typeorm.io/#/transactions/creating-and-using-transactions
+ * This means we will probably need to write methods interacting with models
+ * in a functional way, providing an argument for the connection object
+ * This will make running controller tests in a transaction complicated, for example
+ */
+
+beforeEach(async done => {
   await createConnection()
   const connectionInstance = await getConnection()
   for (const entityMetadata of connectionInstance.entityMetadatas) {
@@ -11,9 +19,10 @@ export async function createConnectionAndNukeDatabase() {
     )
     await repository.clear()
   }
-}
+  done()
+})
 
-export async function nukeDatabaseAndCloseConnection() {
+afterEach(async done => {
   const connectionInstance = await getConnection()
   for (const entityMetadata of connectionInstance.entityMetadatas) {
     const repository = await connectionInstance.getRepository(
@@ -22,4 +31,5 @@ export async function nukeDatabaseAndCloseConnection() {
     await repository.clear()
   }
   await connectionInstance.close()
-}
+  done()
+})
