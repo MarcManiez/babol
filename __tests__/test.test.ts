@@ -1,8 +1,22 @@
 import TestModel from '../app/models/TestModel'
 
 import { getConnection } from 'typeorm'
+import {
+  createConnectionAndNukeDatabase,
+  nukeDatabaseAndCloseConnection,
+} from './setup/databaseSetupAndTearDown'
 
 describe('Interacting with the database', () => {
+  beforeEach(async done => {
+    await createConnectionAndNukeDatabase()
+    done()
+  })
+
+  afterEach(async done => {
+    await nukeDatabaseAndCloseConnection()
+    done()
+  })
+
   it('Correctly creates a record', async done => {
     const testModel = new TestModel()
     testModel.haha = 0

@@ -2,7 +2,7 @@ import { getConnection } from 'typeorm'
 
 import createConnection from '../../app/db/connection'
 
-beforeEach(async done => {
+export async function createConnectionAndNukeDatabase() {
   await createConnection()
   const connectionInstance = await getConnection()
   for (const entityMetadata of connectionInstance.entityMetadatas) {
@@ -11,10 +11,9 @@ beforeEach(async done => {
     )
     await repository.clear()
   }
-  done()
-})
+}
 
-afterEach(async done => {
+export async function nukeDatabaseAndCloseConnection() {
   const connectionInstance = await getConnection()
   for (const entityMetadata of connectionInstance.entityMetadatas) {
     const repository = await connectionInstance.getRepository(
@@ -23,5 +22,4 @@ afterEach(async done => {
     await repository.clear()
   }
   await connectionInstance.close()
-  done()
-})
+}
