@@ -7,6 +7,10 @@ export default class BaseLinkCollection extends BaseModel {
   @Column({ type: 'text', unique: true })
   sourceLink: string
 
+  @Index()
+  @Column({ type: 'int', unique: true })
+  sourceId: string
+
   @Column({ nullable: true })
   artist: string
 
