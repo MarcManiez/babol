@@ -1,11 +1,15 @@
-import { LinkType } from '../../types'
+import { IdParsingError, LinkTypeParsingError } from '../../errors'
+import { LinkType, StreamingService } from '../../types'
 
-export function getId(url: string): string | null {
+export function getId(url: string): string {
   const ids = url.match(/\d+((?=\/$)|$)/g)
-  return ids && ids[0]
+  if (!ids) {
+    throw new IdParsingError(url, StreamingService.Apple)
+  }
+  return ids[0]
 }
 
-export function getType(url: string): LinkType | null {
+export function getType(url: string): LinkType {
   if (url.match(/(?<=\?i=)\d+((?=\/$)|$)/g)) {
     return LinkType.Track
   } else if (url.match(/(?<=\/)album(?=\/)/g)) {
@@ -13,6 +17,6 @@ export function getType(url: string): LinkType | null {
   } else if (url.match(/(?<=\/)artist(?=\/)/g)) {
     return LinkType.Artist
   } else {
-    return null
+    throw new LinkTypeParsingError(url, StreamingService.Apple)
   }
 }

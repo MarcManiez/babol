@@ -1,4 +1,5 @@
 import * as spotify from '../../../app/domain/link_parsing/spotify'
+import { IdParsingError } from '../../../app/errors'
 import { LinkType } from '../../../app/types'
 import * as links from '../../factories/links'
 
@@ -18,9 +19,10 @@ describe('getId', () => {
     expect(id).toBe('0BTfBwYC5Mw5ezDg91JBma')
   })
 
-  it('should return null if the id could not be extracted', () => {
-    const id = spotify.getId('')
-    expect(id).toBe(null)
+  it('should throw if the id could not be extracted', () => {
+    expect(() => spotify.getId('https://open.spotify.com/track')).toThrow(
+      IdParsingError,
+    )
   })
 })
 

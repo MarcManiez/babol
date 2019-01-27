@@ -1,4 +1,5 @@
 import * as apple from '../../../app/domain/link_parsing/apple'
+import { IdParsingError } from '../../../app/errors'
 import { LinkType } from '../../../app/types'
 import * as links from '../../factories/links'
 
@@ -18,9 +19,8 @@ describe('getId', () => {
     expect(id).toBe('5421052')
   })
 
-  it('should return null if the id could not be extracted', () => {
-    const id = apple.getId('')
-    expect(id).toBe(null)
+  it('should throw if the id could not be extracted', () => {
+    expect(() => apple.getId('')).toThrow(IdParsingError)
   })
 })
 

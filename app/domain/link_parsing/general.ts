@@ -1,3 +1,4 @@
+import { UnknownStreamingServiceError } from '../../errors'
 import { StreamingService } from '../../types'
 
 export function detectStreamingService(link: string): StreamingService | null {
@@ -19,5 +20,5 @@ export function detectStreamingService(link: string): StreamingService | null {
       return service as StreamingService
     }
   }
-  return null
+  throw new UnknownStreamingServiceError(link)
 }

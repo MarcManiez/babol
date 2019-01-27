@@ -1,4 +1,5 @@
 import { detectStreamingService } from '../../../app/domain/link_parsing/general'
+import { UnknownStreamingServiceError } from '../../../app/errors'
 import { StreamingService } from '../../../app/types'
 import * as links from '../../factories/links'
 
@@ -28,7 +29,9 @@ describe('detectStreamingService', () => {
     expect(service).toBe(StreamingService.Spotify)
   })
 
-  it('should correctly detect invalid links', () => {
-    expect(detectStreamingService('not even close to being a link')).toBe(null)
+  it('should correctly detect invalid links and throw', () => {
+    expect(() =>
+      detectStreamingService('not even close to being a link'),
+    ).toThrow(UnknownStreamingServiceError)
   })
 })
