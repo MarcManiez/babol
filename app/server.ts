@@ -1,5 +1,6 @@
 import { config } from 'dotenv'
 import * as express from 'express'
+import 'source-map-support/register'
 
 import createConnection from './db/connection'
 import middleware from './middleware'
