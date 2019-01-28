@@ -23,4 +23,9 @@ export default class BaseLinkCollection extends BaseModel {
   @Index()
   @Column({ unique: true })
   slug: string
+
+  constructor(sourceLink: string) {
+    super()
+    this.sourceLink = sourceLink
+  }
 }
