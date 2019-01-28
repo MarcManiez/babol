@@ -6,7 +6,7 @@ import * as links from '../../factories/links'
 describe('getId', () => {
   it('should retrieve a song id given a valid form url', () => {
     const id = spotify.getId(links.spotifyTrackUrl)
-    expect(id).toBe('4JehYebiI9JE8sR8MisGVb')
+    expect(id).toBe('2sJp0csowWQf3sVX7EAffq')
   })
 
   it('should retrieve a album id given a valid form url', () => {

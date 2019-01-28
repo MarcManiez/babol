@@ -10,7 +10,7 @@ export const appleTrackUrl =
   'https://itunes.apple.com/us/album/walk-of-fire/1254730401?i=1254730420'
 
 export const spotifyPlayUrl =
-  'https://open.spotify.com/album/6M0IAJHwQ6dFNtTkFsXCJc'
+  'https://open.spotify.com/album/1JVYMyGjTIQyqBFLkj5HUw'
 
 export const spotifyAlbumUrl =
   'https://open.spotify.com/album/6M0IAJHwQ6dFNtTkFsXCJc'
@@ -19,7 +19,7 @@ export const spotifyArtistUrl =
   'https://open.spotify.com/artist/0BTfBwYC5Mw5ezDg91JBma'
 
 export const spotifyTrackUrl =
-  'https://open.spotify.com/track/4JehYebiI9JE8sR8MisGVb'
+  'https://open.spotify.com/track/2sJp0csowWQf3sVX7EAffq'
 
 export const spotifyArtistUri = 'spotify:artist:6PkSULcbxFKkxdgrmPGAvn'
 
