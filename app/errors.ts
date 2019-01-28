@@ -43,3 +43,23 @@ export class LinkTypeParsingError extends Error {
     Object.setPrototypeOf(this, LinkTypeParsingError.prototype)
   }
 }
+
+export class SlugGenerationError extends Error {
+  message: string
+
+  constructor(url: string) {
+    const message = `Error generating slug for url "${url}"`
+    super(message)
+    Object.setPrototypeOf(this, SlugGenerationError.prototype)
+  }
+}
+
+export class SlugParsingError extends Error {
+  message: string
+
+  constructor(url: string) {
+    const message = `Error parsing slug for url "${url}"`
+    super(message)
+    Object.setPrototypeOf(this, SlugParsingError.prototype)
+  }
+}

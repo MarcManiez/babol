@@ -1,5 +1,6 @@
 import { createHash } from 'crypto'
 
+import { SlugGenerationError, SlugParsingError } from '../errors'
 import { StreamingService, StreamingServiceSlugPrefix } from '../types'
 import * as apple from './link_parsing/apple'
 import { detectStreamingService } from './link_parsing/general'
@@ -7,7 +8,7 @@ import * as spotify from './link_parsing/spotify'
 
 const SLUG_LENGTH = 10
 
-export function generateSlug(link: string): string | null {
+export function generateSlug(link: string): string {
   if (detectStreamingService(link) === StreamingService.Apple) {
     const id = apple.getId(link)
     const hash = id && hashId(id)
@@ -19,16 +20,16 @@ export function generateSlug(link: string): string | null {
       hash && StreamingServiceSlugPrefix.Spotify + hash.slice(0, SLUG_LENGTH)
     )
   }
-  return null
+  throw new SlugGenerationError(link)
 }
 
-export function parseSlug(slug: string): StreamingService | null {
+export function parseSlug(slug: string): StreamingService {
   if (slug.startsWith(StreamingServiceSlugPrefix.Apple)) {
     return StreamingService.Apple
   } else if (slug.startsWith(StreamingServiceSlugPrefix.Spotify)) {
     return StreamingService.Spotify
   }
-  return null
+  throw new SlugParsingError(slug)
 }
 
 function hashId(id: string): string {
