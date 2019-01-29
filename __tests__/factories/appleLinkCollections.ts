@@ -10,5 +10,5 @@ export async function createAppleLinkCollection(connection: EntityManager) {
   appleLinkCollection.album = 'Walk of Fire'
   appleLinkCollection.track = 'Walk of Fire'
   appleLinkCollection.spotifyLink = spotifyTrackUrl
-  return await repository.save(appleLinkCollection)
+  return repository.save(appleLinkCollection)
 }
