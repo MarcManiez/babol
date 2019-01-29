@@ -25,13 +25,6 @@
     "transform": {
       "\\.(ts|tsx)$": "ts-jest"
     },
-    "globals": {
-      "ts-jest": {
-        "diagnostics": {
-          "ignoreCodes": [2339]
-        }
-      }
-    },
     "moduleFileExtensions": [
       "ts",
       "tsx",
