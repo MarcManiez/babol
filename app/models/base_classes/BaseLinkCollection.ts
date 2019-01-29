@@ -1,5 +1,6 @@
 import { Column, Index } from 'typeorm'
 
+import { links } from '../../routeHelpers'
 import BaseModel from './BaseModel'
 
 export default class BaseLinkCollection extends BaseModel {
@@ -27,5 +28,9 @@ export default class BaseLinkCollection extends BaseModel {
   constructor(sourceLink: string) {
     super()
     this.sourceLink = sourceLink
+  }
+
+  babolLinkPath() {
+    return links + '/' + this.slug
   }
 }
