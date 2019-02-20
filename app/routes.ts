@@ -1,8 +1,11 @@
 import { Express } from 'express-serve-static-core'
 
 import apiRoutes from './apiRoutes'
+import * as linksController from './controllers/linksController'
+import { links } from './routeHelpers'
 
 export default function routes(app: Express) {
+  app.get(`${links}/:slug`, linksController.get)
   app.get('/', async (req, res) => {
     // const testModel = new TestModel()
     // testModel.haha = 0

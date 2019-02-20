@@ -63,3 +63,13 @@ export class SlugParsingError extends Error {
     Object.setPrototypeOf(this, SlugParsingError.prototype)
   }
 }
+
+export class MissingParamsError extends Error {
+  message: string
+
+  constructor(params: string[]) {
+    const message = `Missing required params: ${params.toString()}`
+    super(message)
+    Object.setPrototypeOf(this, MissingParamsError.prototype)
+  }
+}

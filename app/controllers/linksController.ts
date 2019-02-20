@@ -4,10 +4,48 @@ import { getConnection } from 'typeorm'
 import * as AppleLinkParsing from '../domain/link_parsing/apple'
 import { detectStreamingService } from '../domain/link_parsing/general'
 import * as SpotifyLinkParsing from '../domain/link_parsing/spotify'
-import { UnknownStreamingServiceError } from '../errors'
+import { parseSlug } from '../domain/slugs'
+import {
+  MissingParamsError,
+  SlugParsingError,
+  UnknownStreamingServiceError,
+} from '../errors'
 import AppleLinkCollection from '../models/AppleLinkCollection'
 import SpotifyLinkCollection from '../models/SpotifyLinkCollection'
 import { StreamingService } from '../types'
+
+export async function get(req: Request, res: Response) {
+  try {
+    const { slug } = req.params
+    if (!slug) {
+      throw new MissingParamsError(['slug'])
+    }
+    const streamingService = parseSlug(slug)
+    let linkCollection
+    if (streamingService === StreamingService.Apple) {
+      const connection = getConnection()
+      const repository = connection.getRepository(AppleLinkCollection)
+      linkCollection = await repository.findOne({ slug })
+    } else if (streamingService === StreamingService.Spotify) {
+      const connection = getConnection()
+      const repository = connection.getRepository(SpotifyLinkCollection)
+      linkCollection = await repository.findOne({ slug })
+    }
+    if (!linkCollection) {
+      return res.status(404).send({ error: 'slug not found' })
+    }
+    res.render('link', { streamingService, linkCollection })
+  } catch (error) {
+    if (
+      error instanceof MissingParamsError ||
+      error instanceof SlugParsingError
+    ) {
+      return res.status(422).send({ error: error.message })
+    } else {
+      throw error
+    }
+  }
+}
 
 export async function post(req: Request, res: Response) {
   const { link } = req.body
@@ -41,6 +79,9 @@ export async function post(req: Request, res: Response) {
         spotifyLinkCollection = await repository.save(spotifyLinkCollection)
       }
       if (!spotifyLinkCollection.appleLink) {
+        sleep(5).then(time =>
+          console.log(`I slept for ${time} seconds, look at me!`),
+        )
         // Spin off worker to fetch song from Apple
         // Careful with this: if for some reason the song can't ever be found,
         // we'll be making requests forever for nothing
@@ -56,4 +97,10 @@ export async function post(req: Request, res: Response) {
       throw error
     }
   }
+}
+
+function sleep(timeInSeconds: number) {
+  return new Promise(resolve =>
+    setTimeout(() => resolve(timeInSeconds), timeInSeconds * 1000),
+  )
 }
