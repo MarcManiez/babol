@@ -1,6 +1,7 @@
 import { Headers } from 'node-fetch'
 
 import { StandardError } from '../../errors'
+import { SearchResultType } from '../../types/spotify'
 import { get, post } from '../requests'
 
 export default class SpotifyClient {
@@ -8,13 +9,38 @@ export default class SpotifyClient {
     const headers = new Headers()
     const bearerToken = await SpotifyClient.getBearerToken()
     headers.append('Authorization', `Bearer ${bearerToken}`)
-    return await get(`${SpotifyClient.url}v1/tracks/${id}`, {
+    return await get(`${SpotifyClient.url}tracks/${id}`, {
       headers,
     })
   }
 
+  /**
+   * Currently ignoring offset, market and include_external params
+   *
+   * @param query should be entered with single quotes or template literals
+   * in order to support quotation marks in search
+   */
+  static async search(
+    query: string,
+    types: SearchResultType[],
+    limit: number = 50,
+  ) {
+    const encodedQuery = encodeURI(query)
+    const joinedTypes = types.join(',')
+    const headers = new Headers()
+    const bearerToken = await SpotifyClient.getBearerToken()
+    headers.append('Authorization', `Bearer ${bearerToken}`)
+    return await get(
+      `${SpotifyClient.url}search?
+        q=${encodedQuery}&
+        type=${joinedTypes}&
+        limit=${limit}`,
+      { headers },
+    )
+  }
+
   private static bearerToken = null
-  private static url = 'https://api.spotify.com/'
+  private static url = 'https://api.spotify.com/v1/'
 
   private static async getBearerToken() {
     if (this.bearerToken) {
