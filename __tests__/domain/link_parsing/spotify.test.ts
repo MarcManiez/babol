@@ -1,6 +1,6 @@
 import * as spotify from '../../../app/domain/link_parsing/spotify'
 import { IdParsingError } from '../../../app/errors'
-import { LinkType } from '../../../app/types'
+import { LinkType } from '../../../app/types/babol'
 import * as links from '../../factories/links'
 
 describe('getId', () => {

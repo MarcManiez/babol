@@ -1,6 +1,6 @@
 import * as apple from '../../../app/domain/link_parsing/apple'
 import { IdParsingError } from '../../../app/errors'
-import { LinkType } from '../../../app/types'
+import { LinkType } from '../../../app/types/babol'
 import * as links from '../../factories/links'
 
 describe('getId', () => {

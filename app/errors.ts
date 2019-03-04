@@ -1,4 +1,4 @@
-import { StreamingService } from './types'
+import { StreamingService } from './types/babol'
 
 // tslint:disable:max-classes-per-file
 export class StandardError extends Error {

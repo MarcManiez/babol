@@ -1,5 +1,5 @@
 import { IdParsingError, LinkTypeParsingError } from '../../errors'
-import { LinkType, StreamingService } from '../../types'
+import { LinkType, StreamingService } from '../../types/babol'
 
 export function getId(url: string): string {
   const ids = url.match(

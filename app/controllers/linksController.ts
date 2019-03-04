@@ -12,7 +12,7 @@ import {
 } from '../errors'
 import AppleLinkCollection from '../models/AppleLinkCollection'
 import SpotifyLinkCollection from '../models/SpotifyLinkCollection'
-import { StreamingService } from '../types'
+import { StreamingService } from '../types/babol'
 
 export async function get(req: Request, res: Response) {
   try {

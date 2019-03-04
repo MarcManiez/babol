@@ -1,7 +1,7 @@
 import { createCipher } from 'crypto'
 
 import { SlugGenerationError, SlugParsingError } from '../errors'
-import { StreamingService, StreamingServiceSlugPrefix } from '../types'
+import { StreamingService, StreamingServiceSlugPrefix } from '../types/babol'
 import * as apple from './link_parsing/apple'
 import { detectStreamingService } from './link_parsing/general'
 import * as spotify from './link_parsing/spotify'

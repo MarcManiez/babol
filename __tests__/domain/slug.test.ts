@@ -1,5 +1,8 @@
 import { generateSlug, parseSlug } from '../../app/domain/slugs'
-import { StreamingService, StreamingServiceSlugPrefix } from '../../app/types'
+import {
+  StreamingService,
+  StreamingServiceSlugPrefix,
+} from '../../app/types/babol'
 import * as links from '../factories/links'
 
 describe('generateSlug', () => {

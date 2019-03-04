@@ -1,5 +1,5 @@
 import { UnknownStreamingServiceError } from '../../errors'
-import { StreamingService } from '../../types'
+import { StreamingService } from '../../types/babol'
 
 export function detectStreamingService(link: string): StreamingService | null {
   const serviceRegexLists: { [service: string]: RegExp[] } = {

@@ -1,6 +1,6 @@
 import { detectStreamingService } from '../../../app/domain/link_parsing/general'
 import { UnknownStreamingServiceError } from '../../../app/errors'
-import { StreamingService } from '../../../app/types'
+import { StreamingService } from '../../../app/types/babol'
 import * as links from '../../factories/links'
 
 describe('detectStreamingService', () => {
