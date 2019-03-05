@@ -23,8 +23,6 @@ async function handleResponse(response: Response) {
   }
   const text = await response.text()
   const body = parseResponseBody(response, text)
-  console.log(body)
-  console.log(response)
   if (response.ok) {
     return body
   } else {
