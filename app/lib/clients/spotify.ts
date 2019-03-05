@@ -1,7 +1,7 @@
 import { Headers } from 'node-fetch'
 
 import { StandardError } from '../../errors'
-import { SearchResultType } from '../../types/spotify'
+import { SearchResults, SearchResultType } from '../../types/spotify'
 import { get, post } from '../requests'
 
 export default class SpotifyClient {
@@ -24,7 +24,7 @@ export default class SpotifyClient {
     query: string,
     types: SearchResultType[],
     limit: number = 50,
-  ) {
+  ): Promise<SearchResults> {
     const encodedQuery = encodeURI(query)
     const joinedTypes = types.join(',')
     const headers = new Headers()
