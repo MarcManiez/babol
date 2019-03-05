@@ -20,9 +20,33 @@ interface Copyright {
 }
 
 interface ExternalId {
-  isrc: string
-  ean: string
-  upc: string
+  isrc?: string
+  ean?: string
+  upc?: string
+}
+
+interface Followers {
+  href: string | null
+  total: number
+}
+
+interface TrackLink {
+  external_urls: ExternalUrl
+  href: string
+  id: string
+  type: string
+  uri: string
+}
+
+interface User {
+  display_name: string | null
+  external_urls: ExternalUrl
+  followers?: Followers
+  href: string
+  id: string
+  images?: Image[]
+  type: 'user'
+  uri: string
 }
 
 type PagingObject<T> = {
@@ -32,7 +56,7 @@ type PagingObject<T> = {
   next: string | null
   offset: number
   previous: number | null
-  total: string
+  total: number
 }
 
 interface SimplifiedAlbum {
@@ -48,6 +72,7 @@ interface SimplifiedAlbum {
   release_date: string
   release_date_precision: string
   restrictions?: Restrictions
+  total_tracks: number
   type: 'album'
   uri: string
 }
@@ -62,14 +87,74 @@ type Album = SimplifiedAlbum & {
 }
 
 interface SimplifiedArtist {
-  placeholder: 'asdf'
+  external_urls: ExternalUrl
+  href: string
+  id: string
+  name: string
+  type: 'artist'
+  uri: string
+}
+
+type Artist = SimplifiedArtist & {
+  followers: Followers
+  genres: string[]
+  images: Image[]
+  popularity: number
+}
+
+interface SimplifiedPlaylist {
+  collaborative: boolean
+  external_urls: ExternalUrl
+  href: string
+  id: string
+  images: Image[]
+  name: string
+  owner: User
+  primary_color: string | null
+  public: boolean | null
+  snapshot_id: string
+  tracks: {
+    href: string
+    total: number
+  }
+  type: 'playlist'
+  uri: string
 }
 
 interface SimplifiedTrack {
-  placeholder: 'asdf'
+  artists: SimplifiedArtist[]
+  available_markets: string[]
+  disc_number: number
+  duration_ms: number
+  explicit: boolean
+  external_urls: ExternalUrl
+  href: string
+  id: string
+  is_playable?: boolean
+  linked_from?: TrackLink
+  restrictions?: Restrictions
+  name: string
+  preview_url: string
+  track_number: number
+  type: 'track'
+  uri: string
+  is_local: boolean
 }
 
-const lol = {
+type Track = SimplifiedTrack & {
+  album: SimplifiedAlbum
+  external_ids: ExternalId
+  popularity: number
+}
+
+export interface SearchResults {
+  albums?: PagingObject<SimplifiedAlbum>
+  artists?: PagingObject<Artist>
+  playlists?: PagingObject<SimplifiedPlaylist>
+  tracks?: PagingObject<Track>
+}
+
+const lol: SearchResults = {
   albums: {
     href:
       'https://api.spotify.com/v1/search?query=test&type=album&offset=0&limit=1',
@@ -194,7 +279,7 @@ const lol = {
       'https://api.spotify.com/v1/search?query=test&type=album&offset=1&limit=1',
     offset: 0,
     previous: null,
-    total: 2003,
+    total: 2002,
   },
   tracks: {
     href:
@@ -446,6 +531,56 @@ const lol = {
       'https://api.spotify.com/v1/search?query=test&type=track&offset=1&limit=1',
     offset: 0,
     previous: null,
-    total: 21418,
+    total: 21438,
+  },
+  playlists: {
+    href:
+      'https://api.spotify.com/v1/search?query=test&type=playlist&offset=0&limit=1',
+    items: [
+      {
+        collaborative: false,
+        external_urls: {
+          spotify: 'https://open.spotify.com/playlist/37i9dQZF1DWZtZ8vUCzche',
+        },
+        href: 'https://api.spotify.com/v1/playlists/37i9dQZF1DWZtZ8vUCzche',
+        id: '37i9dQZF1DWZtZ8vUCzche',
+        images: [
+          {
+            height: null,
+            url:
+              'https://pl.scdn.co/images/pl/default/9679390f7a3a04bc3b8d9cd2b1b4f25035fe0938',
+            width: null,
+          },
+        ],
+        name: 'Songs To Test Headphones With',
+        owner: {
+          display_name: 'Spotify',
+          external_urls: {
+            spotify: 'https://open.spotify.com/user/spotify',
+          },
+          href: 'https://api.spotify.com/v1/users/spotify',
+          id: 'spotify',
+          type: 'user',
+          uri: 'spotify:user:spotify',
+        },
+        primary_color: null,
+        public: null,
+        snapshot_id:
+          'MTU0ODc1MTM0MSwwMDAwMDAyMzAwMDAwMTYwNTFkMmFjM2YwMDAwMDE2ODk4YzYwNzM0',
+        tracks: {
+          href:
+            'https://api.spotify.com/v1/playlists/37i9dQZF1DWZtZ8vUCzche/tracks',
+          total: 150,
+        },
+        type: 'playlist',
+        uri: 'spotify:playlist:37i9dQZF1DWZtZ8vUCzche',
+      },
+    ],
+    limit: 1,
+    next:
+      'https://api.spotify.com/v1/search?query=test&type=playlist&offset=1&limit=1',
+    offset: 0,
+    previous: null,
+    total: 29377,
   },
 }
