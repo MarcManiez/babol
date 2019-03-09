@@ -1,62 +1,10 @@
 export type SearchResultType = 'album' | 'artist' | 'playlist' | 'track'
 
-interface ExternalUrl {
-  spotify: string
-}
-
-interface Image {
-  height: number | null
-  url: string
-  width: number | null
-}
-
-interface Restrictions {
-  [reason: string]: string
-}
-
-interface Copyright {
-  text: string
-  type: 'C' | 'P'
-}
-
-interface ExternalId {
-  isrc?: string
-  ean?: string
-  upc?: string
-}
-
-interface Followers {
-  href: string | null
-  total: number
-}
-
-interface TrackLink {
-  external_urls: ExternalUrl
-  href: string
-  id: string
-  type: string
-  uri: string
-}
-
-interface User {
-  display_name: string | null
-  external_urls: ExternalUrl
-  followers?: Followers
-  href: string
-  id: string
-  images?: Image[]
-  type: 'user'
-  uri: string
-}
-
-type PagingObject<T> = {
-  href: string
-  items: T[]
-  limit: number
-  next: string | null
-  offset: number
-  previous: number | null
-  total: number
+export interface SearchResults {
+  albums?: PagingObject<SimplifiedAlbum>
+  artists?: PagingObject<Artist>
+  playlists?: PagingObject<SimplifiedPlaylist>
+  tracks?: PagingObject<Track>
 }
 
 interface SimplifiedAlbum {
@@ -148,9 +96,61 @@ type Track = SimplifiedTrack & {
   popularity: number
 }
 
-export interface SearchResults {
-  albums?: PagingObject<SimplifiedAlbum>
-  artists?: PagingObject<Artist>
-  playlists?: PagingObject<SimplifiedPlaylist>
-  tracks?: PagingObject<Track>
+type PagingObject<T> = {
+  href: string
+  items: T[]
+  limit: number
+  next: string | null
+  offset: number
+  previous: number | null
+  total: number
+}
+
+interface ExternalUrl {
+  spotify: string
+}
+
+interface Image {
+  height: number | null
+  url: string
+  width: number | null
+}
+
+interface Restrictions {
+  [reason: string]: string
+}
+
+interface Copyright {
+  text: string
+  type: 'C' | 'P'
+}
+
+interface ExternalId {
+  isrc?: string
+  ean?: string
+  upc?: string
+}
+
+interface Followers {
+  href: string | null
+  total: number
+}
+
+interface TrackLink {
+  external_urls: ExternalUrl
+  href: string
+  id: string
+  type: string
+  uri: string
+}
+
+interface User {
+  display_name: string | null
+  external_urls: ExternalUrl
+  followers?: Followers
+  href: string
+  id: string
+  images?: Image[]
+  type: 'user'
+  uri: string
 }
