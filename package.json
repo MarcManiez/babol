@@ -34,7 +34,8 @@
     "setupTestFrameworkScriptFile": "./__tests__/setup/databaseSetupAndTearDown.ts",
     "testPathIgnorePatterns": [
       "./__tests__/setup",
-      "./__tests__/factories"
+      "./__tests__/factories",
+      "./app/"
     ]
   },
   "dependencies": {
