@@ -1,7 +1,6 @@
-import { Album, Artist, SearchResults, Track } from './spotify'
+import { Album, Artist, SearchResults, Track } from '../../../app/types/spotify'
 
-// @ts-ignore: Unused variable
-const searchResultsTestCase: SearchResults = {
+export const spotifySearchResult: SearchResults = {
   albums: {
     href:
       'https://api.spotify.com/v1/search?query=test&type=album&offset=0&limit=1',
@@ -486,8 +485,7 @@ const searchResultsTestCase: SearchResults = {
   },
 }
 
-// @ts-ignore: Unused variable
-const trackLookupResultTestCase: Track = {
+export const spotifyTrack: Track = {
   album: {
     album_type: 'album',
     artists: [
@@ -786,8 +784,7 @@ const trackLookupResultTestCase: Track = {
   uri: 'spotify:track:2sJp0csowWQf3sVX7EAffq',
 }
 
-// @ts-ignore: Unused variable
-const albumLookupTestCase: Album = {
+export const spotifyAlbum: Album = {
   album_type: 'album',
   artists: [
     {
@@ -1377,8 +1374,7 @@ const albumLookupTestCase: Album = {
   uri: 'spotify:album:6M0IAJHwQ6dFNtTkFsXCJc',
 }
 
-// @ts-ignore: Unused variable
-const albumLookupTestCase: Artist = {
+export const spotifyArtist: Artist = {
   external_urls: {
     spotify: 'https://open.spotify.com/artist/0BTfBwYC5Mw5ezDg91JBma',
   },
