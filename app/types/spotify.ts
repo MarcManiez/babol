@@ -17,7 +17,7 @@ type PagingObject<T> = {
   total: number
 }
 
-export interface SearchResult {
+export interface FetchResult {
   album?: Album
   artist?: Artist
   playlist?: SimplifiedPlaylist
