@@ -1,19 +1,11 @@
 import { Headers } from 'node-fetch'
 
 import { StandardError } from '../../errors'
+import { LinkType } from '../../types/babol'
 import { SearchResults, SearchResultType } from '../../types/spotify'
 import { get, post } from '../requests'
 
 export default class SpotifyClient {
-  static async fetchTrack(id: string) {
-    const headers = new Headers()
-    const bearerToken = await SpotifyClient.getBearerToken()
-    headers.append('Authorization', `Bearer ${bearerToken}`)
-    return await get(`${SpotifyClient.url}tracks/${id}`, {
-      headers,
-    })
-  }
-
   /**
    * Currently ignoring offset, market and include_external params
    *
@@ -31,12 +23,18 @@ export default class SpotifyClient {
     const bearerToken = await SpotifyClient.getBearerToken()
     headers.append('Authorization', `Bearer ${bearerToken}`)
     return await get(
-      `${SpotifyClient.url}search?
-        q=${encodedQuery}&
-        type=${joinedTypes}&
-        limit=${limit}`,
+      `${
+        SpotifyClient.url
+      }search?q=${encodedQuery}&type=${joinedTypes}&limit=${limit}`,
       { headers },
     )
+  }
+
+  static async fetch<T>(type: LinkType, id: string): Promise<T> {
+    const headers = new Headers()
+    const bearerToken = await SpotifyClient.getBearerToken()
+    headers.append('Authorization', `Bearer ${bearerToken}`)
+    return await get(`${SpotifyClient.url}${type}s/${id}`, { headers })
   }
 
   private static bearerToken = null
