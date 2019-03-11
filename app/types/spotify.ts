@@ -7,6 +7,23 @@ export interface SearchResults {
   tracks?: PagingObject<Track>
 }
 
+type PagingObject<T> = {
+  href: string
+  items: T[]
+  limit: number
+  next: string | null
+  offset: number
+  previous: number | null
+  total: number
+}
+
+export interface SearchResult {
+  album?: Album
+  artist?: Artist
+  playlist?: SimplifiedPlaylist
+  track?: Track
+}
+
 interface SimplifiedAlbum {
   album_group?: 'album' | 'single' | 'compilation' | 'appears_on'
   album_type: 'album' | 'single' | 'compilation'
@@ -25,14 +42,13 @@ interface SimplifiedAlbum {
   uri: string
 }
 
-// @ts-ignore: Unused class
-type Album = SimplifiedAlbum & {
+export type Album = SimplifiedAlbum & {
   copyrights: Copyright[]
-  external_ids: ExternalId[]
+  external_ids: ExternalId
   genres: string[]
   label: string
   popularity: number
-  tracks: Array<PagingObject<SimplifiedTrack>>
+  tracks: PagingObject<SimplifiedTrack>
 }
 
 interface SimplifiedArtist {
@@ -44,7 +60,7 @@ interface SimplifiedArtist {
   uri: string
 }
 
-type Artist = SimplifiedArtist & {
+export type Artist = SimplifiedArtist & {
   followers: Followers
   genres: string[]
   images: Image[]
@@ -83,27 +99,17 @@ interface SimplifiedTrack {
   linked_from?: TrackLink
   restrictions?: Restrictions
   name: string
-  preview_url: string
+  preview_url: string | null
   track_number: number
   type: 'track'
   uri: string
   is_local: boolean
 }
 
-type Track = SimplifiedTrack & {
+export type Track = SimplifiedTrack & {
   album: SimplifiedAlbum
   external_ids: ExternalId
   popularity: number
-}
-
-type PagingObject<T> = {
-  href: string
-  items: T[]
-  limit: number
-  next: string | null
-  offset: number
-  previous: number | null
-  total: number
 }
 
 interface ExternalUrl {
