@@ -22,7 +22,7 @@ export default class SpotifyClient {
     const headers = new Headers()
     const bearerToken = await SpotifyClient.getBearerToken()
     headers.append('Authorization', `Bearer ${bearerToken}`)
-    return await get(
+    return get(
       `${
         SpotifyClient.url
       }search?q=${encodedQuery}&type=${joinedTypes}&limit=${limit}`,
@@ -34,7 +34,7 @@ export default class SpotifyClient {
     const headers = new Headers()
     const bearerToken = await SpotifyClient.getBearerToken()
     headers.append('Authorization', `Bearer ${bearerToken}`)
-    return await get(`${SpotifyClient.url}${type}s/${id}`, { headers })
+    return get(`${SpotifyClient.url}${type}s/${id}`, { headers })
   }
 
   private static bearerToken = null
@@ -44,7 +44,7 @@ export default class SpotifyClient {
     if (this.bearerToken) {
       return this.bearerToken
     } else {
-      return await SpotifyClient.fetchNewBearerToken()
+      return SpotifyClient.fetchNewBearerToken()
     }
   }
 
