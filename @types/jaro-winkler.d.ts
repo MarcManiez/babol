@@ -5,6 +5,6 @@ declare module 'jaro-winkler' {
   export default function distance(
     string1: string,
     string2: string,
-    options: Options,
+    options?: Options,
   ): number
 }
