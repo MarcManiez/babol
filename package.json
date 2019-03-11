@@ -51,6 +51,7 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "file-loader": "^3.0.1",
+    "jaro-winkler": "^0.2.8",
     "jest": "^23.6.0",
     "mini-css-extract-plugin": "^0.5.0",
     "morgan": "^1.9.1",
