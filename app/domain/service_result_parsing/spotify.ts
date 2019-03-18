@@ -24,38 +24,50 @@ export function extractLink(
     if (!searchResults.artists || searchResults.artists.items.length === 0) {
       throw new Error(`Expected ${linkType} results but found none`)
     }
-    scoredResults = searchResults.artists.items.map(artist => {
-      const artistProperties = extractCoreLinkPropertiesFromSimplifiedArtist(
+    scoredResults = searchResults.artists.items.map(artist =>
+      scoreLinkPropertiesAndExtractLinkScoreCombo(
+        sourceProperties,
+        extractCoreLinkPropertiesFromSimplifiedArtist(artist),
         artist,
-      )
-      const score = scoreLinkPropertiesMatch(sourceProperties, artistProperties)
-      const url = artist.href
-      return { score, url }
-    })
+      ),
+    )
   } else if (linkType === LinkType.Album) {
     if (!searchResults.albums || searchResults.albums.items.length === 0) {
       throw new Error(`Expected ${linkType} results but found none`)
     }
-    scoredResults = searchResults.albums.items.map(album => {
-      const albumProperties = extractCoreLinkPropertiesFromSimplifiedAlbum(
+    scoredResults = searchResults.albums.items.map(album =>
+      scoreLinkPropertiesAndExtractLinkScoreCombo(
+        sourceProperties,
+        extractCoreLinkPropertiesFromSimplifiedAlbum(album),
         album,
-      )
-      const score = scoreLinkPropertiesMatch(sourceProperties, albumProperties)
-      const url = album.href
-      return { score, url }
-    })
+      ),
+    )
   } else if (linkType === LinkType.Track) {
     if (!searchResults.tracks || searchResults.tracks.items.length === 0) {
       throw new Error(`Expected ${linkType} results but found none`)
     }
-    scoredResults = searchResults.tracks.items.map(track => {
-      const trackProperties = extractCoreLinkPropertiesFromTrack(track)
-      const score = scoreLinkPropertiesMatch(sourceProperties, trackProperties)
-      const url = track.href
-      return { score, url }
-    })
+    scoredResults = searchResults.tracks.items.map(track =>
+      scoreLinkPropertiesAndExtractLinkScoreCombo(
+        sourceProperties,
+        extractCoreLinkPropertiesFromTrack(track),
+        track,
+      ),
+    )
   }
   return findBestMatch(scoredResults)
+}
+
+function scoreLinkPropertiesAndExtractLinkScoreCombo(
+  coreLinkProperties1: CoreLinkProperties,
+  coreLinkProperties2: CoreLinkProperties,
+  spotifySearchResult: SimplifiedAlbum | SimplifiedArtist | Track,
+): LinkScoreCombo {
+  const score = scoreLinkPropertiesMatch(
+    coreLinkProperties1,
+    coreLinkProperties2,
+  )
+  const url = spotifySearchResult.href
+  return { score, url }
 }
 
 export function extractCoreLinkProperties(
