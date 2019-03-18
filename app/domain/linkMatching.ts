@@ -1,9 +1,32 @@
 import distance from 'jaro-winkler'
+import { LinkType } from '../types/babol'
+
+export interface LinkScoreCombo {
+  url: string
+  score: number
+}
+
+export function findBestMatch(
+  linkScoreCombos: LinkScoreCombo[],
+): LinkScoreCombo {
+  return linkScoreCombos.sort((a, b) => b.score - a.score)[0]
+}
 
 export interface CoreLinkProperties {
   track?: string
   album?: string
   artist: string
+}
+
+export function getLinkTypeForCoreLinkProperties(
+  coreLinkProperties: CoreLinkProperties,
+): LinkType {
+  if (coreLinkProperties.track) {
+    return LinkType.Track
+  } else if (coreLinkProperties.album) {
+    return LinkType.Album
+  }
+  return LinkType.Artist
 }
 
 export function scoreLinkPropertiesMatch(

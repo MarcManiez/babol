@@ -24,7 +24,7 @@ export interface FetchResult {
   track?: Track
 }
 
-interface SimplifiedAlbum {
+export interface SimplifiedAlbum {
   album_group?: 'album' | 'single' | 'compilation' | 'appears_on'
   album_type: 'album' | 'single' | 'compilation'
   artists: SimplifiedArtist[]
@@ -51,7 +51,7 @@ export type Album = SimplifiedAlbum & {
   tracks: PagingObject<SimplifiedTrack>
 }
 
-interface SimplifiedArtist {
+export interface SimplifiedArtist {
   external_urls: ExternalUrl
   href: string
   id: string
