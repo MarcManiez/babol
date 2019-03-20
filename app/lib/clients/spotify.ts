@@ -2,9 +2,13 @@ import { Headers } from 'node-fetch'
 
 import { StandardError } from '../../errors'
 import { LinkType } from '../../types/babol'
-import { SearchResults, SearchResultType } from '../../types/spotify'
+import {
+  babolLinkTypeToSpotifyResultType,
+  SearchResults,
+} from '../../types/spotify'
 import { get, post } from '../requests'
 
+// TODO: make this a regular module, not a class and redo bearer token getter
 export default class SpotifyClient {
   /**
    * Currently ignoring offset, market and include_external params
@@ -14,11 +18,14 @@ export default class SpotifyClient {
    */
   static async search(
     query: string,
-    types: SearchResultType[],
+    types: LinkType[],
     limit: number = 50,
   ): Promise<SearchResults> {
     const encodedQuery = encodeURI(query)
-    const joinedTypes = types.join(',')
+    const convertedTypes = types.map(
+      type => babolLinkTypeToSpotifyResultType[type],
+    )
+    const joinedTypes = convertedTypes.join(',')
     const headers = new Headers()
     const bearerToken = await SpotifyClient.getBearerToken()
     headers.append('Authorization', `Bearer ${bearerToken}`)

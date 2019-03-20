@@ -1,4 +1,12 @@
+import { LinkType } from './babol'
+
 export type SearchResultType = 'album' | 'artist' | 'playlist' | 'track'
+
+export const babolLinkTypeToSpotifyResultType = {
+  [LinkType.Track]: 'track',
+  [LinkType.Album]: 'album',
+  [LinkType.Artist]: 'artist',
+}
 
 export interface SearchResults {
   albums?: PagingObject<SimplifiedAlbum>
@@ -18,10 +26,9 @@ type PagingObject<T> = {
 }
 
 export interface FetchResult {
-  album?: Album
-  artist?: Artist
-  playlist?: SimplifiedPlaylist
-  track?: Track
+  [LinkType.Album]?: Album
+  [LinkType.Artist]?: Artist
+  [LinkType.Track]?: Track
 }
 
 export interface SimplifiedAlbum {
