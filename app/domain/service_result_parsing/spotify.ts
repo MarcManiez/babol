@@ -71,14 +71,14 @@ function scoreLinkPropertiesAndExtractLinkScoreCombo(
 }
 
 export function extractCoreLinkProperties(
-  fetchResults: FetchResult,
+  fetchResult: FetchResult,
 ): CoreLinkProperties {
-  if (fetchResults.artist) {
-    return extractCoreLinkPropertiesFromSimplifiedArtist(fetchResults.artist)
-  } else if (fetchResults.album) {
-    return extractCoreLinkPropertiesFromSimplifiedAlbum(fetchResults.album)
-  } else if (fetchResults.track) {
-    return extractCoreLinkPropertiesFromTrack(fetchResults.track)
+  if (fetchResult.artist) {
+    return extractCoreLinkPropertiesFromSimplifiedArtist(fetchResult.artist)
+  } else if (fetchResult.album) {
+    return extractCoreLinkPropertiesFromSimplifiedAlbum(fetchResult.album)
+  } else if (fetchResult.track) {
+    return extractCoreLinkPropertiesFromTrack(fetchResult.track)
   }
   throw new Error('Unrecognized search result type.')
 }
