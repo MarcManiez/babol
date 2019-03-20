@@ -1,6 +1,9 @@
 import { LinkType } from '../../types/babol'
 import {
   FetchResult,
+  isAlbum,
+  isArtist,
+  isTrack,
   SearchResults,
   SimplifiedAlbum,
   SimplifiedArtist,
@@ -73,12 +76,12 @@ function scoreLinkPropertiesAndExtractLinkScoreCombo(
 export function extractCoreLinkProperties(
   fetchResult: FetchResult,
 ): CoreLinkProperties {
-  if (fetchResult.artist) {
-    return extractCoreLinkPropertiesFromSimplifiedArtist(fetchResult.artist)
-  } else if (fetchResult.album) {
-    return extractCoreLinkPropertiesFromSimplifiedAlbum(fetchResult.album)
-  } else if (fetchResult.track) {
-    return extractCoreLinkPropertiesFromTrack(fetchResult.track)
+  if (isArtist(fetchResult)) {
+    return extractCoreLinkPropertiesFromSimplifiedArtist(fetchResult)
+  } else if (isAlbum(fetchResult)) {
+    return extractCoreLinkPropertiesFromSimplifiedAlbum(fetchResult)
+  } else if (isTrack(fetchResult)) {
+    return extractCoreLinkPropertiesFromTrack(fetchResult)
   }
   throw new Error('Unrecognized search result type.')
 }

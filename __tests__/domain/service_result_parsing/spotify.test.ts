@@ -8,9 +8,7 @@ import {
 describe('extractCoreLinkProperties', () => {
   describe('track', () => {
     it('should return a core link property object with all attributes', () => {
-      const coreLinkProperties = extractCoreLinkProperties({
-        track: spotifyTrack,
-      })
+      const coreLinkProperties = extractCoreLinkProperties(spotifyTrack)
       expect(coreLinkProperties).toEqual({
         track: spotifyTrack.name,
         album: spotifyTrack.album.name,
@@ -21,9 +19,7 @@ describe('extractCoreLinkProperties', () => {
 
   describe('album', () => {
     it('should return a core link property object album and artist attributes', () => {
-      const coreLinkProperties = extractCoreLinkProperties({
-        album: spotifyAlbum,
-      })
+      const coreLinkProperties = extractCoreLinkProperties(spotifyAlbum)
       expect(coreLinkProperties).toEqual({
         album: spotifyAlbum.name,
         artist: spotifyAlbum.artists.map(({ name }) => name).join(', '),
@@ -33,9 +29,7 @@ describe('extractCoreLinkProperties', () => {
 
   describe('artist', () => {
     it('should return a core link property object with an artist attribute', () => {
-      const coreLinkProperties = extractCoreLinkProperties({
-        artist: spotifyArtist,
-      })
+      const coreLinkProperties = extractCoreLinkProperties(spotifyArtist)
       expect(coreLinkProperties).toEqual({ artist: spotifyArtist.name })
     })
   })

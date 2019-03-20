@@ -25,10 +25,18 @@ type PagingObject<T> = {
   total: number
 }
 
-export interface FetchResult {
-  [LinkType.Album]?: Album
-  [LinkType.Artist]?: Artist
-  [LinkType.Track]?: Track
+export type FetchResult = Album | Artist | Track
+
+export function isAlbum(fetchResult: FetchResult): fetchResult is Album {
+  return fetchResult.type === 'album'
+}
+
+export function isArtist(fetchResult: FetchResult): fetchResult is Artist {
+  return fetchResult.type === 'artist'
+}
+
+export function isTrack(fetchResult: FetchResult): fetchResult is Track {
+  return fetchResult.type === 'track'
 }
 
 export interface SimplifiedAlbum {
