@@ -4,6 +4,7 @@ import { StandardError } from '../../errors'
 import { LinkType } from '../../types/babol'
 import {
   babolLinkTypeToSpotifyResultType,
+  FetchResult,
   SearchResults,
 } from '../../types/spotify'
 import { get, post } from '../requests'
@@ -37,7 +38,7 @@ export default class SpotifyClient {
     )
   }
 
-  static async fetch<T>(type: LinkType, id: string): Promise<T> {
+  static async fetch(type: LinkType, id: string): Promise<FetchResult> {
     const headers = new Headers()
     const bearerToken = await SpotifyClient.getBearerToken()
     headers.append('Authorization', `Bearer ${bearerToken}`)
