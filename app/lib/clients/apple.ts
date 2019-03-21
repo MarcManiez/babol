@@ -36,8 +36,8 @@ export async function search(query: string, types: LinkType[], limit = 200) {
     flattenedConvertedTypes.push(...convertedType),
   )
   const joinedTypes = flattenedConvertedTypes.join(',')
-  const response = (await get(
+  const response = await get(
     `${url}search?media=music&term=${encodedQuery}&entity=${joinedTypes}&limit=${limit}`,
-  )) as SearchResults
-  return response.results
+  )
+  return JSON.parse(response).results
 }
