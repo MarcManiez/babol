@@ -90,7 +90,9 @@ export interface Artist {
 type Explicitness = 'explicit' | 'cleaned' | 'notExplicit'
 
 export function isTrack(searchResult: SearchResult): searchResult is Track {
-  return searchResult.wrapperType === 'track'
+  return (
+    searchResult.wrapperType === 'track' && searchResult.kind !== 'music-video'
+  )
 }
 
 export function isCollection(
