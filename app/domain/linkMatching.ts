@@ -13,9 +13,9 @@ export function findBestMatch(
 }
 
 export interface CoreLinkProperties {
-  track?: string
-  album?: string
-  artist: string
+  [LinkType.Track]?: string
+  [LinkType.Album]?: string
+  [LinkType.Artist]: string
 }
 
 export function getLinkTypeForCoreLinkProperties(
