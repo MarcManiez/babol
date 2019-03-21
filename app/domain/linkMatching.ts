@@ -1,4 +1,4 @@
-import distance from 'jaro-winkler'
+import distance = require('jaro-winkler')
 import { LinkType } from '../types/babol'
 
 export interface LinkScoreCombo {
