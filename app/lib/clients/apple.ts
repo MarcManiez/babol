@@ -12,7 +12,7 @@ const url = 'https://itunes.apple.com/'
  * Returning a promise isn't technically needed, but it's useful to keep the
  * interface parity with fetch methods of other clients.
  */
-export async function fetch(type: LinkType, id: number) {
+export async function fetch(type: LinkType, id: string) {
   const response = (await get(`${url}lookup?id=${id}`)) as SearchResults
   const result = response.results[0]
   const wrapperType = babolLinkTypeToAppleResultType[type]
