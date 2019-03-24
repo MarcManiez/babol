@@ -19,7 +19,11 @@ export async function fetch(type: LinkType, id: string) {
   if (result.wrapperType === expectedWrapperType) {
     return result
   }
-  return null
+  throw new Error(
+    `Unexpected wrapperType type. Expected ${expectedWrapperType}, got ${
+      result.wrapperType
+    }`,
+  )
 }
 
 /**
