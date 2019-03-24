@@ -61,15 +61,28 @@ export async function post(req: Request, res: Response) {
     if (streamingService === StreamingService.Apple) {
       const id = AppleLinkParsing.getId(link)
       const repository = connection.getRepository(AppleLinkCollection)
+      const type = AppleLinkParsing.getType(link)
       let appleLinkCollection = await repository.findOne({ sourceId: id })
       if (!appleLinkCollection) {
         appleLinkCollection = new AppleLinkCollection(link)
         appleLinkCollection = await repository.save(appleLinkCollection)
       }
       if (!appleLinkCollection.spotifyLink) {
-        // Spin off worker to fetch song from spotify
-        // Careful with this: if for some reason the song can't ever be found,
-        // we'll be making requests forever for nothing
+        const result = await AppleClient.fetch(type, id)
+        const coreLinkProperties = AppleResultParsing.extractCoreLinkProperties(
+          result,
+        )
+        const results = await SpotifyClient.search(
+          coreLinkPropertiesToSearchQuery(coreLinkProperties),
+          [type],
+        )
+        const bestMatch = SpotifyResultParsing.extractLink(
+          results,
+          coreLinkProperties,
+        )
+        appleLinkCollection.spotifyLink = bestMatch.url
+        appleLinkCollection.applyCoreLinkProperties(coreLinkProperties)
+        await repository.save(appleLinkCollection)
       }
       return res.json({
         babol_link: host && host + appleLinkCollection.babolLinkPath(),
