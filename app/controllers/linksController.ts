@@ -97,13 +97,7 @@ export async function post(req: Request, res: Response) {
           coreLinkProperties,
         )
         spotifyLinkCollection.appleLink = bestMatch.url
-        spotifyLinkCollection.artist = coreLinkProperties.artist
-        if (coreLinkProperties.album) {
-          spotifyLinkCollection.album = coreLinkProperties.album
-        }
-        if (coreLinkProperties.artist) {
-          spotifyLinkCollection.artist = coreLinkProperties.artist
-        }
+        spotifyLinkCollection.applyCoreLinkProperties(coreLinkProperties)
         await repository.save(spotifyLinkCollection)
       }
       return res.json({

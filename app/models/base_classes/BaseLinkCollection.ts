@@ -1,5 +1,6 @@
 import { Column, Index } from 'typeorm'
 
+import { CoreLinkProperties } from '../../domain/linkMatching'
 import { links } from '../../routeHelpers'
 import BaseModel from './BaseModel'
 
@@ -32,5 +33,18 @@ export default class BaseLinkCollection extends BaseModel {
 
   babolLinkPath() {
     return links + '/' + this.slug
+  }
+
+  applyCoreLinkProperties(coreLinkProperties: CoreLinkProperties) {
+    this.artist = coreLinkProperties.artist
+    if (coreLinkProperties.album) {
+      this.album = coreLinkProperties.album
+    }
+    if (coreLinkProperties.artist) {
+      this.artist = coreLinkProperties.artist
+    }
+    if (coreLinkProperties.track) {
+      this.track = coreLinkProperties.track
+    }
   }
 }
