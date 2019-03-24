@@ -69,7 +69,7 @@ function scoreLinkPropertiesAndExtractLinkScoreCombo(
     coreLinkProperties1,
     coreLinkProperties2,
   )
-  const url = spotifySearchResult.href
+  const url = spotifySearchResult.external_urls.spotify
   return { score, url }
 }
 
