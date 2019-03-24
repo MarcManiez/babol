@@ -15,8 +15,8 @@ const url = 'https://itunes.apple.com/'
 export async function fetch(type: LinkType, id: string) {
   const response = (await get(`${url}lookup?id=${id}`)) as SearchResults
   const result = response.results[0]
-  const wrapperType = babolLinkTypeToAppleResultType[type]
-  if (result.wrapperType === wrapperType) {
+  const expectedWrapperType = babolLinkTypeToAppleResultType[type]
+  if (result.wrapperType === expectedWrapperType) {
     return result
   }
   return null
